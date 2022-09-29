@@ -1,6 +1,6 @@
 export default {
-  name: 'category',
-  title: 'Category',
+  name: 'social',
+  title: 'Social',
   type: 'document',
   fields: [
     {
@@ -8,10 +8,14 @@ export default {
       title: 'Title',
       type: 'string',
     },
+
     {
-      name: 'description',
-      title: 'Description',
-      type: 'text',
+      name: 'url',
+      title: 'Url',
+      type: 'url',
     },
+
   ],
+
+
 }
