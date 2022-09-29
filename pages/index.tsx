@@ -1,13 +1,23 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import About from '../components/About'
 import Contact from '../components/Contact'
-import Experience from '../components/Experience'
+import ExperienceComponent from '../components/ExperienceComponent'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Projects from '../components/Projects'
 import Skills from '../components/Skills'
+import { Experience, PageInfo, Project, Skill, Social } from '../typings'
+type Props = {
+  pageInfo : PageInfo ; 
+  experiences : Experience[] ; 
+  projects: Project[] ; 
+  skills: Skill[] ; 
+  socials : Social[]
+
+  
+}
 
 const Home: NextPage = () => {
   return (
@@ -32,7 +42,7 @@ const Home: NextPage = () => {
       {/* Experience */}
 
       <section id="experience" className='snap-center'>
-        <Experience />
+        <ExperienceComponent />
       </section>
 
       {/* Skills */}
@@ -66,3 +76,8 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+
+export const getStaticProps : GetStaticProps<Props> = async () => {
+
+}
