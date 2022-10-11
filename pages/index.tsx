@@ -1,5 +1,6 @@
-import type { GetStaticProps, NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
 import Link from 'next/link'
 import About from '../components/About'
 import Contact from '../components/Contact'
@@ -70,7 +71,10 @@ const Home: NextPage<Props> = ({pageInfo,experiences,projects,skills,socials}:Pr
       <Link href={"#hero"} >
       <footer className='sticky bottom-5 w-full cursor-pointer'>
         <div className='flex items-center justify-center'>
-          <img src="/images/me.jpg" alt="Avatar" className='w-10 h-10 rounded-full filter grayscale hover:grayscale-0 object-cover' />
+          <div className='relative w-10 h-10  filter grayscale hover:grayscale-0'>
+
+          <Image src="/images/me.jpg" alt="Avatar" objectFit='cover' layout='fill' className='rounded-full' />
+          </div>
         </div>
       </footer>
       </Link>
@@ -95,8 +99,10 @@ export const getStaticProps : GetStaticProps<Props> = async () => {
       experiences,
       skills,
       projects,
-      socials
+      socials,
     },
-    revalidate:10
+    revalidate:10,
+    
+    
   }
 }

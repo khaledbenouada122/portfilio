@@ -25,6 +25,7 @@ function Hero({pageInfo}: Props) {
           layout="fill"
           objectFit="cover"
           className="rounded-full "
+          alt="Hero Image"
         />
       </div>
       <div className="z-20">
