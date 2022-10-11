@@ -4,7 +4,7 @@ import {groq} from 'next-sanity'
 import { sanityClient} from "../../sanity";
 
 const query = groq`
-    *[_type == "project"][0]
+    *[_type == "pageInfo"][0]
 `
 type Data={
     pageInfo : PageInfo

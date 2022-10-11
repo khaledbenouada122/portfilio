@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
+import { urlFor } from "../sanity";
+import { Experience } from "../typings";
 
-type Props = {};
+type Props = {
+  experience: Experience;
+};
 
-function ExperienceCard({}: Props) {
+function ExperienceCard({experience}: Props) {
   return (
     <article className="flex flex-col rounded-lg  items-center space-y-7 flex-shrink-0  md:w-[600px] xl:w-[900px] w-full snap-center bg-[#292929] p-10 opacity-40 hover:opacity-100 cursor-pointer transition-opacity duration-200 overflow-hidden  ">
       <motion.img
@@ -15,26 +19,30 @@ function ExperienceCard({}: Props) {
         transition={{ duration: 1.2 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        src="/images/tabaani.jpg"
+        src={urlFor(experience.companyImage).url()}
         className=" relative w-32 h-32 xl:w-[200px] xl:h-[200px] rounded-full object-center object-contain   "
       />
       <div className="px-0 md:px-10 ">
-        <h4 className="text-4xl font-light">Front End Developer</h4>
-        <p className="font-bold text-2xl mt-1">TABAANI</p>
+        <h4 className="text-4xl font-light">{experience.jobTitle}</h4>
+        <p className="font-bold text-2xl mt-1">{experience.company}</p>
         <div className="flex space-x-2 my-2">
-          <img src="/images/react.png" alt="" className="w-10 h-10 rounded-full" />
-          <img src="/images/react.png" alt="" className="w-10 h-10 rounded-full" />
-          <img src="/images/react.png" alt="" className="w-10 h-10 rounded-full" />
-          <img src="/images/react.png" alt="" className="w-10 h-10 rounded-full" />
+          {experience?.technologies?.map((tech) => (            
+          <img key={tech._id} src={urlFor(tech.image)?.url()} alt="Technology" className="w-10 h-10 rounded-full" />
+          ))}
+
 
         </div>
-        <p className="uppercase py-5 text-gray-300">Started work... -Ended...</p>
-        <ul className="list-disc space-y-4 mt-5 text-lg">
-          <li>Test.....</li>
-          <li>Test.....</li>
-          <li>Test.....</li>
-          <li>Test.....</li>
-          <li>Test.....</li>
+        <p className="uppercase py-5 text-gray-300">
+          {new Date(experience?.dateStarted).toDateString()} - {
+            experience.isCurrentWorkingHere
+            ? 'Present'
+            : new Date(experience?.dateEnded).toDateString()
+          }
+        </p>
+        <ul className="list-disc space-y-4 mt-5 text-lg h-80 overflow-y-scroll scrollbar-thin scrollbar-track-black scrollbar-thumb-[#f7ab0a]/40 pr-4">
+          {experience?.points.map((point,index)=>(
+            <li key={index}>{point}</li>
+          ))}
         </ul>
       </div>
     </article>

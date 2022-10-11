@@ -16,11 +16,11 @@ function Contact({}: Props) {
     window.location.href = `mailto:naderelhaj3@gmail?subject=${formData.subject}&body=${formData.message}`;
   };
   return (
-    <div className="h-screen relative flex flex-col text-center md:text-left md:flex-row max-w-7xl px-10 justify-evenly mx-auto items-center   ">
+    <div className="  h-screen relative flex flex-col text-center md:text-left md:flex-row max-w-7xl px-10 justify-evenly mx-auto items-center pb-20  ">
       <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl">
         CONTACT
       </h3>
-      <div className="flex flex-col space-y-10 mt-44 lg:mt-0">
+      <div className="flex flex-col space-y-10 mt-64 xl:mt-44">
         <h4 className="text-4xl font-semibold text-center">
           I have got what you need,
           <span className="decoration-[#f7ab0a] underline">Lets Talk.</span>
@@ -69,7 +69,7 @@ function Contact({}: Props) {
             {...register("message")}
           />
           <button
-            type="sumbit"
+            type="submit"
             className="bg-[#f7ab0a] py-5 px-10 rounded-md text-black font-bold text-lg"
           >
             Submit

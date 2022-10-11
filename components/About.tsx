@@ -1,8 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-type Props = {};
+import { PageInfo } from "../typings";
+import { urlFor } from "../sanity";
+type Props = {
+  pageInfo: PageInfo;
+};
 
-function About({}: Props) {
+function About({pageInfo}: Props) {
   return (
     <motion.div 
         initial={{opacity:0}}
@@ -14,7 +18,7 @@ function About({}: Props) {
       </h3>
 
       <motion.img
-        src="/images/me.jpg"
+        src={urlFor(pageInfo?.profilePic).url()}
         initial={{
           x: -200,
           opacity: 0,
@@ -25,7 +29,7 @@ function About({}: Props) {
         }}
         viewport={{ once: true }}
         transition={{ duration: 1.2 }}
-        className="mt-32 md:mt-0 xl:mt-32   flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:-w-64 md:h-95 xl:w-[500px] xl:h-[600px] "
+        className="mt-32 lg:mt-44   flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:-w-64 md:h-95 xl:w-[500px] xl:h-[600px] "
       />
       <div className="space-y-10 px-0 md:px-10">
         <h4 className="text-4xl font-semibold ">
@@ -33,13 +37,7 @@ function About({}: Props) {
           <span className=" underline decoration-[#f7ab0a]/50">little</span>{" "}
           background:{" "}
         </h4>
-        <p className="text-base">
-          Talented Frontend Developer specialized in semantic responsive markup
-          layouts and converting from Figma mockups CSS/React. I'm in love with
-          all the fancy stuff like CSS3 flexbox, grid,animations, and
-          transition, as well as Responsive design -
-          Bootstrap4/TailwindCss/customCs
-        </p>
+        <p className="text-base">{pageInfo?.backgroundInformation}</p>
       </div>
     </motion.div>
   );
