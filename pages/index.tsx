@@ -10,6 +10,11 @@ import Hero from '../components/Hero'
 import Projects from '../components/Projects'
 import Skills from '../components/Skills'
 import { Experience, PageInfo, Project, Skill, Social } from '../typings'
+import { fetchExperience } from '../utils/fetchExperience'
+import { fetchPageInfo } from '../utils/fetchPageInfo'
+import { fetchProjects } from '../utils/fetchProjects'
+import { fetchSkills } from '../utils/fetchSkills'
+import { fetchSocials } from '../utils/fetchSocials'
 
 type Props = {
   pageInfo : PageInfo ; 
@@ -81,37 +86,8 @@ const Home: NextPage<Props> = ({pageInfo,experiences,projects,skills,socials}:Pr
 }
 
 
-export const getServerSideProps : GetServerSideProps<Props> = async () => {
-   const fetchExperience = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getExperience`);
-    const data = await res.json();
-    const experiences: Experience[] = data.experiences;
-    return experiences;
-}
-const fetchPageInfo = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getPageInfo`);
-  const data = await res.json();
-  const pageInfo: PageInfo = data.pageInfo;
-  return pageInfo;
-}
-const fetchProjects = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getProjects`);
-  const data = await res.json();
-  const projects: Project[] = data.projects;
-  return projects;
-}
-const fetchSkills = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getSkills`);
-  const data = await res.json();
-  const skills: Skill[] = data.skills;
-  return skills;
-}
-const fetchSocials = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getSocials`);
-  const data = await res.json();
-  const socials: Social[] = data.socials;
-   return socials;
-}
+export async function getServerSideProps() {
+
 
 
   return {
