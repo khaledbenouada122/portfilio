@@ -29,7 +29,7 @@ function About({pageInfo}: Props) {
         }}
         viewport={{ once: true }}
         transition={{ duration: 1.2 }}
-        className="mt-32 lg:mt-44   flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:-w-64 md:h-95 xl:w-[500px] xl:h-[600px] "
+        className="mt-32 lg:mt-44   flex-shrink-0 w-48 h-48 rounded-full object-cover md:rounded-lg md:-w-56 md:h-80 xl:w-[400px] xl:h-[500px] "
       />
       <div className="space-y-10 px-0 md:px-10">
         <h4 className="text-4xl font-semibold ">
