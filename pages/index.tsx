@@ -1,4 +1,4 @@
-import { GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,11 +10,7 @@ import Hero from '../components/Hero'
 import Projects from '../components/Projects'
 import Skills from '../components/Skills'
 import { Experience, PageInfo, Project, Skill, Social } from '../typings'
-import { fetchExperience } from '../utils/fetchExperience'
-import { fetchPageInfo } from '../utils/fetchPageInfo'
-import { fetchProjects } from '../utils/fetchProjects'
-import { fetchSkills } from '../utils/fetchSkills'
-import { fetchSocials } from '../utils/fetchSocials'
+
 type Props = {
   pageInfo : PageInfo ; 
   experiences : Experience[] ; 
@@ -36,36 +32,36 @@ const Home: NextPage<Props> = ({pageInfo,experiences,projects,skills,socials}:Pr
       
       <Header socials={socials} />
 
-      <section id='hero' className=''>
+      <section id='hero' className='snap-center'>
         <Hero pageInfo ={pageInfo} />
       </section>
 
       {/* About */}
-      <section id="about" className=''>
+      <section id="about" className='snap-center'>
         <About pageInfo={pageInfo} />
       </section>
 
       {/* Experience */}
 
-      <section id="experience" className=' '>
+      <section id="experience" className=' snap-center'>
         <ExperienceComponent experiences={experiences} />
       </section>
 
       {/* Skills */}
 
-      <section id="skills" className=' '>
+      <section id="skills" className='snap-start '>
         <Skills skills={skills} />
       </section>
 
       {/* Projects */}
 
-      <section id="projects" className=''>
+      <section id="projects" className='snap-start'>
         <Projects projects={projects} />
       </section>
 
       {/* Contact */}
 
-      <section id="contact" className=' '>
+      <section id="contact" className=' snap-start'>
         <Contact />
       </section>
       <Link href={"#hero"} >
@@ -84,10 +80,39 @@ const Home: NextPage<Props> = ({pageInfo,experiences,projects,skills,socials}:Pr
   )
 }
 
-export default Home
 
+export const getServerSideProps : GetServerSideProps<Props> = async () => {
+   const fetchExperience = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getExperience`);
+    const data = await res.json();
+    const experiences: Experience[] = data.experiences;
+    return experiences;
+}
+const fetchPageInfo = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getPageInfo`);
+  const data = await res.json();
+  const pageInfo: PageInfo = data.pageInfo;
+  return pageInfo;
+}
+const fetchProjects = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getProjects`);
+  const data = await res.json();
+  const projects: Project[] = data.projects;
+  return projects;
+}
+const fetchSkills = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getSkills`);
+  const data = await res.json();
+  const skills: Skill[] = data.skills;
+  return skills;
+}
+const fetchSocials = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getSocials`);
+  const data = await res.json();
+  const socials: Social[] = data.socials;
+   return socials;
+}
 
-export const getStaticProps : GetStaticProps<Props> = async () => {
 
   return {
     props: {
@@ -95,10 +120,8 @@ export const getStaticProps : GetStaticProps<Props> = async () => {
       experiences : await fetchExperience(),
       skills : await fetchSkills(),
       projects : await fetchProjects(),
-      socials : await fetchSocials(),
-    },
-    revalidate:10,
-    
-    
+      socials : await  fetchSocials()
+    }
   }
 }
+export default Home
