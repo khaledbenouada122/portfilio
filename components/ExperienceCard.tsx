@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import Image from "next/image";
 import React from "react";
 import { urlFor } from "../sanity";
 import { Experience } from "../typings";
+import Image from "next/image";
 
 type Props = {
   experience: Experience;
@@ -27,9 +27,9 @@ function ExperienceCard({experience}: Props) {
         <p className="font-bold text-2xl mt-1">{experience.company}</p>
         <div className="flex space-x-2 my-2">
           {experience?.technologies?.map((tech) => (     
-            <div className="w-10 h-10 rounded-full relative" key={tech._id}>
+            <div className=" rounded-full " key={tech._id}>
               
-              <Image  src={urlFor(tech.image)?.url()} alt="Technology" layout="fill" />
+              <Image  src={urlFor(tech.image)?.url()} alt="Technology" width={40} height={40}  />
             </div>       
           ))}
 

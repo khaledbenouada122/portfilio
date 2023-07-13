@@ -22,10 +22,11 @@ function Hero({pageInfo}: Props) {
       <div className="relative rounded-full h-32 w-32 mx-auto ">
         <Image
           src={urlFor(pageInfo?.heroImage).url()}
-          layout="fill"
           objectFit="cover"
           className="rounded-full "
           alt="Hero Image"
+          width={128}
+          height={128}
         />
       </div>
       <div className="z-20">
