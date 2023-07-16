@@ -75,7 +75,7 @@ const Home: NextPage<Props> = ({pageInfo,experiences,projects,skills,socials}:Pr
         <div className='flex items-center justify-center'>
           <div className='  filter grayscale hover:grayscale-0'>
 
-          <Image src={urlFor(pageInfo?.profilePic).url()} alt="Avatar" objectFit='cover' layout='fill' className='rounded-full' width={40} height={40} />
+          <Image src={urlFor(pageInfo?.profilePic).url()} alt="Avatar" className='rounded-full' width={40} height={40} />
           </div>
         </div>
       </footer>
