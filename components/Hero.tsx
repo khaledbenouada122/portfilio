@@ -22,7 +22,6 @@ function Hero({pageInfo}: Props) {
       <div className="relative rounded-full h-32 w-32 mx-auto ">
         <Image
           src={urlFor(pageInfo?.heroImage).url()}
-          objectFit="cover"
           className="rounded-full "
           alt="Hero Image"
           width={128}
